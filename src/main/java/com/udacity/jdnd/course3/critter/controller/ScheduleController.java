@@ -10,7 +10,6 @@ import com.udacity.jdnd.course3.critter.services.ScheduleService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,12 +24,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/schedule")
 public class ScheduleController {
 
-    @Autowired
-    private EmployeeService employeeService;
-    @Autowired
-    private PetService petService;
-    @Autowired
-    private ScheduleService scheduleService;
+    private final EmployeeService employeeService;
+    private final PetService petService;
+    private final ScheduleService scheduleService;
+
+    public ScheduleController(
+        EmployeeService employeeService, PetService petService, ScheduleService scheduleService) {
+        this.employeeService = employeeService;
+        this.petService = petService;
+        this.scheduleService = scheduleService;
+    }
 
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
