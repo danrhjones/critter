@@ -26,7 +26,7 @@ public class UserController {
     private CustomerService customerService;
 
     @PostMapping("/customer")
-    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
+    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
@@ -36,8 +36,8 @@ public class UserController {
     }
 
     @GetMapping("/customer")
-    public List<CustomerDTO> getAllCustomers(){
-        List<Customer> customers =  customerService.getAllCustomers();
+    public List<CustomerDTO> getAllCustomers() {
+        List<Customer> customers = customerService.getAllCustomers();
         List<CustomerDTO> list = new ArrayList<>();
         for (Customer customer : customers) {
             CustomerDTO customerDTO = getCustomerDTO(customer);
@@ -47,8 +47,8 @@ public class UserController {
     }
 
     @GetMapping("/customer/pet/{petId}")
-    public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
+    public CustomerDTO getOwnerByPet(@PathVariable long petId) {
+        return getCustomerDTO(customerService.getCustomerByPetId(petId));
     }
 
     public CustomerDTO getCustomerDTO(Customer customer) {
@@ -57,7 +57,8 @@ public class UserController {
         customerDTO.setName(customer.getName());
         customerDTO.setPhoneNumber(customer.getPhoneNumber());
         customerDTO.setNotes(customer.getNotes());
-        List<Long> petIds = customer.getPets().stream().map(Pet::getId).collect(Collectors.toList());
+        List<Long> petIds = customer.getPets().stream().map(Pet::getId)
+            .collect(Collectors.toList());
         customerDTO.setPetIds(petIds);
         return customerDTO;
     }
