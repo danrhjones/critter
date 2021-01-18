@@ -7,6 +7,7 @@ import com.udacity.jdnd.course3.critter.services.EmployeeService;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class EmployeeController {
         Employee employee = new Employee();
         employee.setName(employeeDTO.getName());
         employee.setSkills(employeeDTO.getSkills());
+        employee.setDaysAvailable(employeeDTO.getDaysAvailable());
         return getEmployeeDTO(employeeService.saveEmployee(employee));
     }
 
@@ -37,12 +39,15 @@ public class EmployeeController {
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        Employee employee = employeeService.getEmployeeById(employeeId);
+        employee.setDaysAvailable(daysAvailable);
+        getEmployeeDTO(employeeService.saveEmployee(employee));
     }
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        List<Employee> employees = employeeService.getEmployeesForService(employeeDTO.getDate(), employeeDTO.getSkills());
+        return employees.stream().map(this::getEmployeeDTO).collect(Collectors.toList());
     }
 
     public EmployeeDTO getEmployeeDTO(Employee employee) {

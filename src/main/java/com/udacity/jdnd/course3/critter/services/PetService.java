@@ -29,6 +29,11 @@ public class PetService {
         return petRepository.getOne(petId);
     }
 
+    public List<Pet> getPetsById(List<Long> petIds) {
+        return petRepository.findAllById(petIds);
+
+    }
+
     public List<Pet> getAllPets() {
         return petRepository.findAll();
     }
