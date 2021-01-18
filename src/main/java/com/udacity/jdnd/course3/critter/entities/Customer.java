@@ -25,4 +25,8 @@ public class Customer {
     private String notes;
     @OneToMany(targetEntity = Pet.class)
     private List<Pet> pets;
+
+    public void addPet(Pet pet) {
+        pets.add(pet);
+    }
 }
