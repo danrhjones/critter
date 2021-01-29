@@ -44,15 +44,14 @@ You must have a [MySQL server running](https://dev.mysql.com/doc/mysql-getting-s
 
 ### Build
 
-This is an example of how to list things you need to use the software and how to install them.
-
+To build the project run the command:
   ```sh
   mvn clean install
   ```
 
 ### Run
 
-Run the application from the command line with 
+Run the application with: 
 
   ```sh 
   java -jar target/critter-0.0.1-SNAPSHOT.jar
