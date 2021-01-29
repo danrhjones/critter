@@ -14,7 +14,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#build">Build</a></li>
-        <li><a href="#run">run</a></li>
+        <li><a href="#run">Run</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -60,8 +60,6 @@ Run the application from the command line with
 ## Usage
 Included is a [Postman collection](src/main/resources/Udacity.postman_collection.json) that can be imported to Postman desktop
 
-
-Project Link: [https://github.com/danrhjones/critter](https://github.com/danrhjones/critter)
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/danrhjones/
